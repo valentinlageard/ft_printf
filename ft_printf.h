@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 18:19:25 by vlageard          #+#    #+#             */
+/*   Updated: 2020/01/10 14:35:43 by vlageard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-#include <stdarg.h>
+# include <stdarg.h>
 
 typedef struct	s_format
 {
@@ -12,7 +24,7 @@ typedef struct	s_format
 }				t_format;
 
 char			*format_char(t_format *format, va_list valist);
-//char			*format_int(t_format *format, va_list valist);
+char			*format_int(t_format *format, va_list valist);
 char			*format_str(t_format *format, va_list valist);
 char			*format_uint(t_format *format, va_list valist);
 char			*formatter(t_format *format, va_list valist);

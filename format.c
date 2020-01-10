@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   format.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 18:19:31 by vlageard          #+#    #+#             */
+/*   Updated: 2020/01/10 14:35:27 by vlageard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft/libft.h"
 #include "ft_printf.h"
 #include <stdarg.h>
@@ -13,9 +25,9 @@ char	*formatter(t_format *format, va_list valist)
 		str = format_str(format, valist);
 	else if (format->conversion == 'u')
 		str = format_uint(format, valist);
-	/*else if (format->conversion == 'd' || format->conversion == 'i')
+	else if (format->conversion == 'd' || format->conversion == 'i')
 		str = format_int(format, valist);
-	else if (format->conversion == 'p')
+	/*else if (format->conversion == 'p')
 		str = format_point(format, valist);
 	else if (format->conversion == 'x' || format->conversion == 'X')
 		str = format_hex(format, valist);*/

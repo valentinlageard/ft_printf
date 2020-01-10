@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:04:06 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/09 15:52:14 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/10 14:50:15 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,10 @@ char		*parse_format(int *i, const char *fstr, va_list valist)
 	parse_right_fieldwidth(i, fstr, format);
 	parse_precision(i, fstr, format);
 	parse_conversion(i, fstr, format);//, valist);
-	// Soit c'est le parsing qui lit la valist pour remplir le format
-	// En fait il faudrait tester l'original pour voir si en cas d'erreur de parsing c'est 
-	// Soit on le transmet à format et dans ce cas c'est lui qui lit la va_list
+	// Ajouter le support des wildcard dans les fonctions de parsing.
+	// Mais laisser la récupération du vararg central par la fonction de format
 	str = formatter(format, valist);
 	//print_t_format(format); // Debugging
-	// Récupérer l'argument variable
 	free(format);
 	//if (!str)
 	//	*i = start;

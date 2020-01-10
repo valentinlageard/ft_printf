@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 22:51:48 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/09 17:15:30 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/10 12:52:45 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 int		uint_get_str_size(t_format *format, char *u_str)
 {
@@ -75,7 +74,7 @@ char	*uint_fill_str_precision(char *str, t_format *format, char* u_str)
 	{
 		ft_memset((void *)str, 48, p_pad);
 		ft_memcpy((void *)(str + p_pad), (void *)u_str, u_slen);
-		ft_memset((void *)(str + p_pad + u_slen), 32, u_slen);
+		ft_memset((void *)(str + p_pad + u_slen), 32, fw_pad);
 	}
 	return (str);
 }
