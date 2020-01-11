@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:04:06 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/10 14:50:15 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/11 16:19:01 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,57 +29,76 @@
 
 // THIS IS WHERE THE PARSING HAPPEN
 
-void		parse_left_fieldwidth(int *i, const char *fstr, t_format *format)//, va_list valist)
+void		parse_left_fieldwidth(int *i, const char *fstr, t_format *format, va_list valist)
 {
-	if (!ft_isdigit(fstr[*i]))
+	if (!ft_isdigit(fstr[*i]) && fstr[*i] != '*')
 		return ;
 	if (fstr[*i] == '0')
 	{
 		format->fieldwidth_mode = 1;
 		(*i)++;
 	}
-	// Ajouter la wildcard *
-	format->fieldwidth = ft_atoi(fstr + *i);
-	while (ft_isdigit(fstr[*i]) && fstr[*i])
+	if (fstr[*i] == '*')
 	{
+		format->fieldwidth = va_arg(valist, int);
 		(*i)++;
+	}
+	else
+	{
+		format->fieldwidth = ft_atoi(fstr + *i);
+		while (ft_isdigit(fstr[*i]) && fstr[*i])
+			(*i)++;
 	}
 }
 
-void		parse_right_fieldwidth(int *i, const char *fstr, t_format *format)//, va_list valist)
+void		parse_right_fieldwidth(int *i, const char *fstr, t_format *format, va_list valist)
 {
 	if (fstr[*i] != '-')
 		return ;
 	(*i)++;
-	if (!ft_isdigit(fstr[*i]) || format->fieldwidth > 0)
+	if ((!ft_isdigit(fstr[*i]) && fstr[*i] != '*') || format->fieldwidth > 0)
 	{
 		format->error = 1;
 		return ;
 	}
 	format->fieldwidth_mode = 2;
-	// Ajouter la wildcard *
-	format->fieldwidth = ft_atoi(fstr + *i);
-	while (ft_isdigit(fstr[*i]) && fstr[*i])
+	if (fstr[*i] == '*')
+	{
+		format->fieldwidth = va_arg(valist, int);
 		(*i)++;
+	}
+	else
+	{
+		format->fieldwidth = ft_atoi(fstr + *i);
+		while (ft_isdigit(fstr[*i]) && fstr[*i])
+			(*i)++;
+	}
 }
 
-void		parse_precision(int *i, const char *fstr, t_format *format)//, va_list valist)
+void		parse_precision(int *i, const char *fstr, t_format *format, va_list valist)
 {
 	if (fstr[*i] != '.')
 		return ;
 	(*i)++;
-	if (!ft_isdigit(fstr[*i]))
+	if (!ft_isdigit(fstr[*i]) && fstr[*i] != '*')
 	{
 		format->error = 1;
 		return ;
 	}
-	// Ajouter la wildcard *
-	format->precision = ft_atoi(fstr + *i);
-	while (ft_isdigit(fstr[*i]) && fstr[*i])
+	if (fstr[*i] == '*')
+	{
+		format->precision = va_arg(valist, int);
 		(*i)++;
+	}
+	else
+	{
+		format->precision = ft_atoi(fstr + *i);
+		while (ft_isdigit(fstr[*i]) && fstr[*i])
+			(*i)++;
+	}
 }
 
-void		parse_conversion(int *i, const char *fstr, t_format *format)//, va_list valist)
+void		parse_conversion(int *i, const char *fstr, t_format *format)
 {
 	if (!(is_conversion(fstr[*i])))
 	{
@@ -102,12 +121,10 @@ char		*parse_format(int *i, const char *fstr, va_list valist)
 	}
 	if (!(format = create_format()))
 	 	return (NULL);
-	parse_left_fieldwidth(i, fstr, format);
-	parse_right_fieldwidth(i, fstr, format);
-	parse_precision(i, fstr, format);
-	parse_conversion(i, fstr, format);//, valist);
-	// Ajouter le support des wildcard dans les fonctions de parsing.
-	// Mais laisser la récupération du vararg central par la fonction de format
+	parse_left_fieldwidth(i, fstr, format, valist);
+	parse_right_fieldwidth(i, fstr, format, valist);
+	parse_precision(i, fstr, format, valist);
+	parse_conversion(i, fstr, format);
 	str = formatter(format, valist);
 	//print_t_format(format); // Debugging
 	free(format);

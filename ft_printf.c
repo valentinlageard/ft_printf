@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:18 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/10 12:47:53 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/11 16:19:08 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdlib.h>
-//#include <stdio.h>
+#include <stdio.h>
 
 int parse_fstr(const char *fstr, va_list valist)
 {
