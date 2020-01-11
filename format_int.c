@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:03:32 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/10 14:56:24 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/11 15:57:52 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ char	*format_int(t_format *format, va_list valist)
 	int		str_size;
 	
 	va_int = va_arg(valist, int);
-	i_s = ft_itoa(va_int);
+	if (!(i_s = ft_itoa(va_int)))
+		return (NULL);
 	str_size = int_get_str_size(format, i_s);
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
