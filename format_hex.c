@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:09:16 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/10 19:56:09 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/11 15:11:41 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 int		hex_get_str_size(t_format *format, char *h_str)
 {

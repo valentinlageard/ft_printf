@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:25 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/10 19:42:20 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/11 15:38:59 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_format
 char			*format_char(t_format *format, va_list valist);
 char			*format_hex(t_format *format, va_list valist);
 char			*format_int(t_format *format, va_list valist);
+char			*format_pointer(t_format *format, va_list valist);
 char			*format_str(t_format *format, va_list valist);
 char			*format_uint(t_format *format, va_list valist);
 char			*formatter(t_format *format, va_list valist);

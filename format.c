@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:31 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/10 19:41:41 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/11 15:35:18 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ char	*formatter(t_format *format, va_list valist)
 		str = format_uint(format, valist);
 	else if (format->conversion == 'd' || format->conversion == 'i')
 		str = format_int(format, valist);
-	//else if (format->conversion == 'p')
-	//	str = format_point(format, valist);
+	else if (format->conversion == 'p')
+		str = format_pointer(format, valist);
 	else if (format->conversion == 'x' || format->conversion == 'X')
 		str = format_hex(format, valist);
 	return (str);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoabase.c                                      :+:      :+:    :+:   */
+/*   ft_ultoabase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/10 16:54:43 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/11 15:42:12 by vlageard         ###   ########.fr       */
+/*   Created: 2020/01/11 15:41:38 by vlageard          #+#    #+#             */
+/*   Updated: 2020/01/11 15:45:41 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int		get_str_size(unsigned int n, int base_len)
 	int	str_size;
 	
 	str_size = 0;
-	while (n >= (unsigned int)base_len)
+	while (n >= (unsigned long)base_len)
 	{
 		str_size++;
 		n = n / base_len;
@@ -48,7 +48,7 @@ static int		get_str_size(unsigned int n, int base_len)
 	return (str_size);
 }
 
-char			*ft_utoabase(unsigned int n, const char *base)
+char			*ft_ultoabase(unsigned long n, const char *base)
 {
 	char *str;
 	int	base_len;
@@ -62,7 +62,7 @@ char			*ft_utoabase(unsigned int n, const char *base)
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
 	i = str_size - 1;
-	while (n >= (unsigned int)base_len)
+	while (n >= (unsigned long)base_len)
 	{
 		str[i] = base[n % base_len];
 		n = n / base_len;
