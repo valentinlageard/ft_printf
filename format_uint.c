@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 22:51:48 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/11 15:58:32 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/12 18:04:32 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,15 @@ char	*format_uint(t_format *format, va_list valist)
 	va_uint = va_arg(valist, unsigned int);
 	if (!(u_str = ft_utoa(va_uint)))
 		return (NULL);
-	str_size = uint_get_str_size(format, u_str);
+	if (format->precision == 0 && va_uint == 0)
+		str_size = 0;
+	else
+		str_size = uint_get_str_size(format, u_str);
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
 	if (format->precision == -1)
 		str = uint_fill_str_no_precision(str, format, u_str);
-	else
+	else if (format->precision > 0 || va_uint != 0)
 		str = uint_fill_str_precision(str, format, u_str);
 	str[str_size] = 0;
 	free(u_str);

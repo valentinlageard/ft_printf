@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:09:16 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/11 15:11:41 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/12 18:01:16 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,15 @@ char	*format_hex(t_format *format, va_list valist)
 	ft_utoabase(va_hex, "0123456789ABCDEF");
 	if (!h_str)
 		return (NULL);
-	str_size =  hex_get_str_size(format, h_str);
+	if (format->precision == 0 && va_hex == 0)
+		str_size = 0;
+	else
+		str_size =  hex_get_str_size(format, h_str);
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
 	if (format->precision == -1)
 		str = hex_fill_no_precision(str, format, h_str);
-	else
+	else if (format->precision > 0 || va_hex != 0)
 		str = hex_fill_precision(str, format, h_str);
 	str[str_size] = 0;
 	free(h_str);

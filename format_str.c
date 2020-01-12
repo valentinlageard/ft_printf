@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 14:58:16 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/09 14:02:01 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/12 17:32:52 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		str_get_str_size(t_format *format, char *va_str)
 	return (str_size);
 }
 
-char	*str_fill_str(char *str, t_format *format, char *va_str, int str_size)
+char	*str_fill_str(char *str, t_format *format, char *va_str)
 {
 	int	crop;
 	int	pad;
@@ -50,7 +50,6 @@ char	*str_fill_str(char *str, t_format *format, char *va_str, int str_size)
 		ft_memset((void *)str, 32, pad);
 		ft_memcpy((void *)(str + pad), (void *)va_str, crop);
 	}
-	str[str_size] = 0;
 	return (str);
 }
 
@@ -61,9 +60,14 @@ char	*format_str(t_format *format, va_list valist)
 	int		str_size;
 
 	va_str = va_arg(valist, char *);
-	str_size = str_get_str_size(format, va_str);
+	if (va_str)
+		str_size = str_get_str_size(format, va_str);
+	else
+		str_size = 0;
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
-	str = str_fill_str(str, format, va_str, str_size);
+	if (va_str)
+		str = str_fill_str(str, format, va_str);
+	str[str_size] = 0;
 	return (str);
 }
