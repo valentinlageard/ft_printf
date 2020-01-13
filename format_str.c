@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 14:58:16 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/12 17:32:52 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/12 18:15:58 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int		str_get_str_size(t_format *format, char *va_str)
 	int	str_size;
 	int	va_strlen;
 	
-	va_strlen = ft_strlen(va_str);
+	if (!va_str)
+		va_strlen = 0;
+	else
+		va_strlen = ft_strlen(va_str);
 	if (format->precision == -1)
 		str_size = va_strlen + ft_max(0, format->fieldwidth - va_strlen);
 	else
@@ -35,10 +38,15 @@ char	*str_fill_str(char *str, t_format *format, char *va_str)
 {
 	int	crop;
 	int	pad;
+	int	va_strlen;
 	
+	if (!va_str)
+		va_strlen = 0;
+	else
+		va_strlen = ft_strlen(va_str);
 	crop = format->precision == -1 ?
-	(int)ft_strlen(va_str) :
-	ft_min(ft_strlen(va_str), format->precision);
+	(int)va_strlen :
+	ft_min(va_strlen, format->precision);
 	pad = ft_max(0, format->fieldwidth - crop);
 	if (format->fieldwidth_mode == 2)
 	{
@@ -60,14 +68,10 @@ char	*format_str(t_format *format, va_list valist)
 	int		str_size;
 
 	va_str = va_arg(valist, char *);
-	if (va_str)
-		str_size = str_get_str_size(format, va_str);
-	else
-		str_size = 0;
+	str_size = str_get_str_size(format, va_str);
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
-	if (va_str)
-		str = str_fill_str(str, format, va_str);
+	str = str_fill_str(str, format, va_str);
 	str[str_size] = 0;
 	return (str);
 }

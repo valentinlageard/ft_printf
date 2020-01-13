@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:25 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/11 15:38:59 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/13 15:28:26 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char			*parse_format(int *i, const char *fstr, va_list valist);
 int				ft_printf(const char *fstr, ...);
 int				is_conversion(char c);
 t_format		*create_format();
+int				percent_check(int *i, const char *fstr);
 
 #endif

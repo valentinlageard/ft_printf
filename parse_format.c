@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:04:06 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/12 17:04:30 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/13 15:28:32 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,8 @@ char		*parse_format(int *i, const char *fstr, va_list valist)
 	t_format	*format;
 	char		*str;
 	
-	if (fstr[*i] == '%')
-	{
-		(*i)++;
+	if (percent_check(i, fstr))
 		return (ft_strdup("%"));
-	}
 	if (!(format = create_format()))
 	 	return (NULL);
 	parse_left_fieldwidth(i, fstr, format, valist);
@@ -126,10 +123,7 @@ char		*parse_format(int *i, const char *fstr, va_list valist)
 	parse_precision(i, fstr, format, valist);
 	parse_conversion(i, fstr, format);
 	str = formatter(format, valist);
-	// Add % support if % is not immediately after.
 	//print_t_format(format); // Debugging
 	free(format);
-	//if (!str)
-	//	*i = start;
 	return (str);
 }
