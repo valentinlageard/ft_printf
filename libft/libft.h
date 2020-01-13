@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 21:08:46 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/11 15:43:30 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/13 16:09:23 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_ultoabase(unsigned long n, const char *base);
 char			*ft_utoa(unsigned int n);
 char			*ft_utoabase(unsigned int n, const char *base);
+int				ft_abs(int n);
 int				ft_atoi(const char *nptr);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);

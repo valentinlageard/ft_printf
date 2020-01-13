@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:04:06 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/13 15:28:32 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/13 16:22:25 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void		parse_left_fieldwidth(int *i, const char *fstr, t_format *format, va_list 
 	if (fstr[*i] == '*')
 	{
 		format->fieldwidth = va_arg(valist, int);
+		if (format->fieldwidth < 0)
+		{
+			format->fieldwidth = ft_abs(format->fieldwidth);
+			format->fieldwidth_mode = 2;
+		}
 		(*i)++;
 	}
 	else
@@ -65,6 +70,11 @@ void		parse_right_fieldwidth(int *i, const char *fstr, t_format *format, va_list
 	if (fstr[*i] == '*')
 	{
 		format->fieldwidth = va_arg(valist, int);
+		if (format->fieldwidth < 0)
+		{
+			format->fieldwidth = ft_abs(format->fieldwidth);
+			format->fieldwidth_mode = 0;
+		}
 		(*i)++;
 	}
 	else
@@ -87,7 +97,7 @@ void		parse_precision(int *i, const char *fstr, t_format *format, va_list valist
 	}
 	if (fstr[*i] == '*')
 	{
-		format->precision = va_arg(valist, int);
+		format->precision = ft_abs(va_arg(valist, int));
 		(*i)++;
 	}
 	else
