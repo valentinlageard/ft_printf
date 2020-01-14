@@ -6,12 +6,13 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:40:04 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/14 17:20:30 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/14 19:03:57 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
+#include <stdio.h>
 
 void check_padding(int *j, const char *fstr)
 {
@@ -35,6 +36,8 @@ void check_padding(int *j, const char *fstr)
 				(*j)++;
 		}
 	}
+	if (fstr[*j] == '*')
+		(*j)++;
 }
 
 void check_precision(int *j, const char *fstr)
