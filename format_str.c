@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 14:58:16 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/13 15:57:25 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/14 18:32:08 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 int		str_get_str_size(t_format *format, char *va_str)
 {
@@ -92,6 +93,8 @@ char	*format_str(t_format *format, va_list valist)
 	int		str_size;
 
 	va_str = va_arg(valist, char *);
+	if (format->precision < -1)
+		format->precision = -1;
 	str_size = str_get_str_size(format, va_str);
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
