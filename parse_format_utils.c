@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:03:48 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/14 18:39:57 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/14 19:17:16 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int			percent_check(int *i, const char *fstr)
 	int	j;
 	
 	j = *i;
-	while (ft_iscinstr(fstr[j], "0123456789-.cspdiuxX*"))
+	while (ft_iscinstr(fstr[j], "0123456789-.*"))
 		j++;
+	if (ft_iscinstr(fstr[j], "cspdiuxX"))
+		return (0);
 	if (fstr[j] == '%')
 	{
 		*i = j + 1;
