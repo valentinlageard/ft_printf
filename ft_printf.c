@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:18 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/12 15:43:56 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/14 15:17:48 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,17 @@ int parse_fstr(const char *fstr, va_list valist)
 		else
 		{
 			i++;
-			str = parse_format(&i, fstr, valist);
-			if (!str)
-				return (-1);
-			ft_putstr_fd(str, 1);
-			count += ft_strlen(str);
-			free(str);
+			if (format_is_valid(i, fstr))
+			{
+				str = parse_format(&i, fstr, valist);
+				if (!str)
+					return (-1);
+				ft_putstr_fd(str, 1);
+				count += ft_strlen(str);
+				free(str);
+			}
+			else
+				ft_putchar_fd('%', 1);
 		}
 	}
 	return (count);

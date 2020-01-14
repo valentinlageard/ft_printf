@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:03:48 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/13 15:29:11 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/14 15:31:45 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_format	*create_format()
 	new_format->fieldwidth = 0;
 	new_format->fieldwidth_mode = 0;
 	new_format->precision = -1;
-	new_format->error = 0;
 	return (new_format);
 }
 
