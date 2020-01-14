@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 22:51:48 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/12 18:04:32 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/14 17:27:05 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-int		uint_get_str_size(t_format *format, char *u_str)
+int		uint_get_str_size(t_format *format, char *u_str, int va_uint)
 {
 	int	str_size;
 	int	u_slen;
 	int	fw_pad;
 	int p_pad;
 	
-	u_slen = ft_strlen(u_str);
+	if (format->precision == 0 && va_uint == 0)
+		u_slen = 0;
+	else
+		u_slen = ft_strlen(u_str);
 	if (format->precision == -1)
 		str_size = u_slen + ft_max(0, format->fieldwidth - u_slen);
 	else
@@ -87,17 +90,18 @@ char	*format_uint(t_format *format, va_list valist)
 	char	*str;
 	
 	va_uint = va_arg(valist, unsigned int);
-	if (!(u_str = ft_utoa(va_uint)))
-		return (NULL);
 	if (format->precision == 0 && va_uint == 0)
-		str_size = 0;
+		u_str = ft_strdup("");
 	else
-		str_size = uint_get_str_size(format, u_str);
+		u_str = ft_utoa(va_uint);
+	if (!u_str)
+		return (NULL);
+	str_size = uint_get_str_size(format, u_str, va_uint);
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
 	if (format->precision == -1)
 		str = uint_fill_str_no_precision(str, format, u_str);
-	else if (format->precision > 0 || va_uint != 0)
+	else
 		str = uint_fill_str_precision(str, format, u_str);
 	str[str_size] = 0;
 	free(u_str);

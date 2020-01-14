@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:04:06 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/14 16:05:34 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/14 18:13:57 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 
 /*void		print_t_format(t_format *format)
 {
+	printf("\n--------\n");	
 	printf("conversion : %c\n", format->conversion);
 	printf("fieldwidth : %i\n", format->fieldwidth);
 	printf("fieldwidth_mode : %i\n", format->fieldwidth_mode);
 	printf("precision : %i\n", format->precision);
-	printf("error : %i\n", format->error);
 }*/
 
 // THIS IS WHERE THE PARSING HAPPEN
@@ -92,7 +92,7 @@ void		parse_precision(int *i, const char *fstr, t_format *format, va_list valist
 	}
 	if (fstr[*i] == '*')
 	{
-		format->precision = ft_abs(va_arg(valist, int));
+		format->precision = va_arg(valist, int);
 		(*i)++;
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:40:04 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/14 15:50:30 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/14 17:20:30 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 void check_padding(int *j, const char *fstr)
 {
+	if (fstr[*j] == '0')
+		(*j)++;
 	if (fstr[*j] == '*')
 		(*j)++;
 	else

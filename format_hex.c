@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:09:16 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/12 18:01:16 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/14 17:53:12 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-int		hex_get_str_size(t_format *format, char *h_str)
+int		hex_get_str_size(t_format *format, char *h_str, int va_hex)
 {
 	int	p_pad;
 	int	fw_pad;
 	int	h_slen;
 	int	str_size;
 	
-	h_slen = ft_strlen(h_str);
+	if (format->precision == 0 && va_hex == 0)
+		h_slen = 0;
+	else
+		h_slen = ft_strlen(h_str);
 	if (format->precision == -1)
 	{
 		fw_pad = ft_max(0, format->fieldwidth - h_slen);
@@ -94,20 +97,20 @@ char	*format_hex(t_format *format, va_list valist)
 	char			*str;
 	
 	va_hex = va_arg(valist, unsigned int);
-	h_str = format->conversion == 'x' ?
-	ft_utoabase(va_hex, "0123456789abcdef") :
-	ft_utoabase(va_hex, "0123456789ABCDEF");
+	if (format->precision == 0 && va_hex == 0)
+		h_str = ft_strdup("");
+	else
+		h_str = format->conversion == 'x' ?
+		ft_utoabase(va_hex, "0123456789abcdef") :
+		ft_utoabase(va_hex, "0123456789ABCDEF");
 	if (!h_str)
 		return (NULL);
-	if (format->precision == 0 && va_hex == 0)
-		str_size = 0;
-	else
-		str_size =  hex_get_str_size(format, h_str);
+	str_size =  hex_get_str_size(format, h_str, va_hex);
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
 	if (format->precision == -1)
 		str = hex_fill_no_precision(str, format, h_str);
-	else if (format->precision > 0 || va_hex != 0)
+	else
 		str = hex_fill_precision(str, format, h_str);
 	str[str_size] = 0;
 	free(h_str);
