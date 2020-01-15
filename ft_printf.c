@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:18 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/14 19:04:12 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/16 00:03:29 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,52 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
+
+int	parse_fstr_and_print(int *i, const char *fstr, va_list valist, int *error)
+{
+	int		count;
+	char	*str;
+	
+	str = NULL;
+	if (format_is_valid(*i, fstr))
+	{
+		str = parse_format(i, fstr, valist);
+		if (!str)
+			return (-1);
+		count = ft_strlen(str);
+		*error = ft_rtputstr_fd(str, 1);
+		free(str);
+	}
+	else
+		*error = ft_rtputchar_fd('%', 1);
+	return (count);
+}
 
 int parse_fstr(const char *fstr, va_list valist)
 {
-	int i;
-	int count;
-	char *str;
+	int		i;
+	int		count;
+	int		error;
 	
 	i = 0;
 	count = 0;
-	str = NULL;
+	error = 0;
 	while (fstr[i])
 	{
 		if (fstr[i] != '%')
 		{
-			ft_putchar_fd(fstr[i], 1);
+			error = ft_rtputchar_fd(fstr[i], 1);
 			i++;
 			count++;
 		}
 		else
 		{
 			i++;
-			if (format_is_valid(i, fstr))
-			{
-				str = parse_format(&i, fstr, valist);
-				if (!str)
-					return (-1);
-				ft_putstr_fd(str, 1);
-				count += ft_strlen(str);
-				free(str);
-			}
-			else
-				ft_putchar_fd('%', 1);
+			count += parse_fstr_and_print(&i, fstr, valist, &error);
 		}
+		if (error < 0)
+			return (error);
 	}
 	return (count);
 }
