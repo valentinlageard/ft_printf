@@ -6,13 +6,12 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:40:04 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/20 16:42:37 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/02/04 16:38:04 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	check_padding(int *j, const char *fstr)
 {
@@ -62,7 +61,7 @@ int		format_is_valid(int i, const char *fstr)
 	j = i;
 	check_padding(&j, fstr);
 	check_precision(&j, fstr);
-	if (is_conversion(fstr[j]) || fstr[j] == '%')
+	if (is_conversion(fstr[j]))
 		return (1);
 	else
 		return (0);

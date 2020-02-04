@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 14:58:16 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/20 16:41:19 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/02/04 15:59:51 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 int		str_get_str_size(t_format *format, char *va_str)
 {
@@ -22,7 +21,12 @@ int		str_get_str_size(t_format *format, char *va_str)
 	int	va_strlen;
 
 	if (!va_str)
-		va_strlen = format->precision >= 6 || format->precision == -1 ? 6 : 0;
+	{
+		if (format->precision >= 6 || format->precision == -1)
+			va_strlen = 6;
+		else
+			va_strlen = format->precision;
+	}
 	else
 		va_strlen = ft_strlen(va_str);
 	if (format->precision == -1)
@@ -68,18 +72,23 @@ char	*str_fill_null(char *str, t_format *format)
 {
 	int		pad;
 	char	*null;
+	int		va_strlen;
 
-	pad = ft_max(0, format->fieldwidth - 6);
+	if (format->precision >= 6 || format->precision == -1)
+		va_strlen = 6;
+	else
+		va_strlen = format->precision;
+	pad = ft_max(0, format->fieldwidth - va_strlen);
 	null = ft_strdup("(null)");
 	if (format->fieldwidth_mode != 2)
 	{
 		ft_memset((void *)str, 32, pad);
-		ft_memcpy((void *)(str + pad), (void *)null, 6);
+		ft_memcpy((void *)(str + pad), (void *)null, va_strlen);
 	}
 	else
 	{
-		ft_memcpy((void *)str, (void *)null, 6);
-		ft_memset((void *)(str + 6), 32, pad);
+		ft_memcpy((void *)str, (void *)null, va_strlen);
+		ft_memset((void *)(str + va_strlen), 32, pad);
 	}
 	free(null);
 	return (str);
@@ -97,7 +106,7 @@ char	*format_str(t_format *format, va_list valist)
 	str_size = str_get_str_size(format, va_str);
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
-	if (!va_str && (format->precision >= 6 || format->precision == -1))
+	if (!va_str)
 		str = str_fill_null(str, format);
 	else
 		str = str_fill_str(str, format, va_str);

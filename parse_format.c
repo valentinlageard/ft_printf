@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:04:06 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/20 18:23:17 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:19:19 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void		parse_right_fieldwidth(int *i, const char *fstr, t_format *format,
 		return ;
 	}
 	format->fieldwidth_mode = 2;
+	while (fstr[*i] == '0')
+		(*i)++;
 	if (fstr[*i] == '*')
 	{
 		format->fieldwidth = ft_abs(va_arg(valist, int));
@@ -98,20 +100,19 @@ void		parse_conversion(int *i, const char *fstr, t_format *format)
 	(*i)++;
 }
 
-char		*parse_format(int *i, const char *fstr, va_list valist)
+char		*parse_format(int *i, const char *fstr, va_list valist,
+	int *nullchar)
 {
 	t_format	*format;
 	char		*str;
 
-	if (percent_check(i, fstr))
-		return (ft_strdup("%"));
 	if (!(format = create_format()))
 		return (NULL);
 	parse_left_fieldwidth(i, fstr, format, valist);
 	parse_right_fieldwidth(i, fstr, format, valist);
 	parse_precision(i, fstr, format, valist);
 	parse_conversion(i, fstr, format);
-	str = formatter(format, valist);
+	str = formatter(format, valist, nullchar);
 	free(format);
 	return (str);
 }

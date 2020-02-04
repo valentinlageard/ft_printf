@@ -6,30 +6,13 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:03:48 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/20 18:35:36 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/02/04 19:13:11 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft/libft.h"
-
-int			percent_check(int *i, const char *fstr)
-{
-	int	j;
-
-	j = *i;
-	while (ft_iscinstr(fstr[j], "0123456789-.*"))
-		j++;
-	if (ft_iscinstr(fstr[j], "cspdiuxX"))
-		return (0);
-	if (fstr[j] == '%')
-	{
-		*i = j + 1;
-		return (1);
-	}
-	return (0);
-}
 
 t_format	*create_format(void)
 {
@@ -46,5 +29,5 @@ t_format	*create_format(void)
 
 int			is_conversion(char c)
 {
-	return (ft_iscinstr(c, "cspdiuxX"));
+	return (ft_iscinstr(c, "cspdiuxX%"));
 }

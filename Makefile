@@ -10,6 +10,7 @@ SRC			=	ft_printf.c \
 				format_pointer.c \
 				format_str.c \
 				format_uint.c \
+				format_percent.c \
 				format_validity.c
 
 OBJS		=	$(SRC:.c=.o)
@@ -27,7 +28,7 @@ $(NAME):	$(OBJS) $(LIBFT) ft_printf.h
 
 $(LIBFT):
 			make -C libft
-	
+
 clean:
 			rm -f $(OBJS)
 			make -C libft clean

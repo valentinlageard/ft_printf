@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:03:32 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/20 18:32:05 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/02/04 16:45:52 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 int		int_get_str_size(t_format *format, char *i_s, int va_int)
 {

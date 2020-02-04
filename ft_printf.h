@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:25 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/20 16:43:18 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:51:09 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ typedef struct	s_format
 	int			precision;
 }				t_format;
 
-char			*format_char(t_format *format, va_list valist);
+char			*format_char(t_format *format, va_list valist, int *nullchar);
 char			*format_hex(t_format *format, va_list valist);
 char			*format_int(t_format *format, va_list valist);
 char			*format_pointer(t_format *format, va_list valist);
 char			*format_str(t_format *format, va_list valist);
 char			*format_uint(t_format *format, va_list valist);
-char			*formatter(t_format *format, va_list valist);
-char			*parse_format(int *i, const char *fstr, va_list valist);
+char			*format_percent(t_format *format);
+char			*formatter(t_format *format, va_list valist, int *nullchar);
+char			*parse_format(int *i, const char *fstr, va_list valist,
+				int *nullchar);
 int				format_is_valid(int i, const char *fstr);
 int				ft_printf(const char *fstr, ...);
 int				is_conversion(char c);

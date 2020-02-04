@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:18 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/20 18:33:19 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/02/04 19:15:55 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,44 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
+
+int	nullchar_case(char *str, int *nullchar, int *error)
+{
+	if (*nullchar == 1)
+	{
+		*error = ft_rtputstr_fd(str, 1);
+		*error = ft_rtputchar_fd(0, 1);
+	}
+	else
+	{
+		*error = ft_rtputchar_fd(0, 1);
+		*error = ft_rtputstr_fd(str, 1);
+	}
+	return (ft_strlen(str) + 1);
+}
 
 int	parse_fstr_and_print(int *i, const char *fstr, va_list valist, int *error)
 {
 	int		count;
 	char	*str;
+	int		nullchar;
 
 	str = NULL;
 	count = 0;
+	nullchar = 0;
 	if (format_is_valid(*i, fstr))
 	{
-		str = parse_format(i, fstr, valist);
+		str = parse_format(i, fstr, valist, &nullchar);
 		if (!str)
 			return (-1);
-		count = ft_strlen(str);
-		*error = ft_rtputstr_fd(str, 1);
-		free(str);
+		if (!nullchar)
+		{
+			count = ft_strlen(str);
+			*error = ft_rtputstr_fd(str, 1);
+			free(str);
+		}
+		else
+			count = nullchar_case(str, &nullchar, error);
 	}
 	else
 		*error = ft_rtputchar_fd('%', 1);
