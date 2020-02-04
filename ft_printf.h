@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:25 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/19 01:24:51 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 16:43:18 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 typedef struct	s_format
 {
 	char		conversion;
-	int			fieldwidth; 
-	int			fieldwidth_mode; // 0 : field_width space, 2 : 0 left fieldwidth, 3 : right fieldwidth
+	int			fieldwidth;
+	int			fieldwidth_mode;
 	int			precision;
 }				t_format;
 

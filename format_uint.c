@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 22:51:48 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/14 17:27:05 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 18:22:13 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		uint_get_str_size(t_format *format, char *u_str, int va_uint)
 	int	u_slen;
 	int	fw_pad;
 	int p_pad;
-	
+
 	if (format->precision == 0 && va_uint == 0)
 		u_slen = 0;
 	else
@@ -38,11 +38,11 @@ int		uint_get_str_size(t_format *format, char *u_str, int va_uint)
 	return (str_size);
 }
 
-char	*uint_fill_str_no_precision(char *str, t_format *format, char* u_str)
+char	*uint_fill_str_no_precision(char *str, t_format *format, char *u_str)
 {
 	int	pad;
 	int	u_slen;
-	
+
 	u_slen = ft_strlen(u_str);
 	pad = ft_max(0, format->fieldwidth - u_slen);
 	if (format->fieldwidth_mode == 0)
@@ -58,12 +58,12 @@ char	*uint_fill_str_no_precision(char *str, t_format *format, char* u_str)
 	return (str);
 }
 
-char	*uint_fill_str_precision(char *str, t_format *format, char* u_str)
+char	*uint_fill_str_precision(char *str, t_format *format, char *u_str)
 {
 	int	fw_pad;
 	int	p_pad;
 	int	u_slen;
-	
+
 	u_slen = ft_strlen(u_str);
 	p_pad = ft_max(0, format->precision - u_slen);
 	fw_pad = ft_max(0, format->fieldwidth - (p_pad + u_slen));
@@ -88,7 +88,7 @@ char	*format_uint(t_format *format, va_list valist)
 	char	*u_str;
 	int		str_size;
 	char	*str;
-	
+
 	va_uint = va_arg(valist, unsigned int);
 	if (format->precision == 0 && va_uint == 0)
 		u_str = ft_strdup("");

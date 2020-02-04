@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:09:16 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/14 17:53:12 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 16:39:18 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		hex_get_str_size(t_format *format, char *h_str, int va_hex)
 	int	fw_pad;
 	int	h_slen;
 	int	str_size;
-	
+
 	if (format->precision == 0 && va_hex == 0)
 		h_slen = 0;
 	else
@@ -44,7 +44,7 @@ char	*hex_fill_no_precision(char *str, t_format *format, char *h_str)
 {
 	int	h_slen;
 	int	fw_pad;
-	
+
 	h_slen = ft_strlen(h_str);
 	fw_pad = ft_max(0, format->fieldwidth - h_slen);
 	if (format->fieldwidth_mode == 0)
@@ -70,7 +70,7 @@ char	*hex_fill_precision(char *str, t_format *format, char *h_str)
 	int	h_slen;
 	int	p_pad;
 	int	fw_pad;
-	
+
 	h_slen = ft_strlen(h_str);
 	p_pad = ft_max(0, format->precision - h_slen);
 	fw_pad = ft_max(0, format->fieldwidth - (p_pad + h_slen));
@@ -95,7 +95,7 @@ char	*format_hex(t_format *format, va_list valist)
 	unsigned int	va_hex;
 	char			*h_str;
 	char			*str;
-	
+
 	va_hex = va_arg(valist, unsigned int);
 	if (format->precision == 0 && va_hex == 0)
 		h_str = ft_strdup("");
@@ -105,7 +105,7 @@ char	*format_hex(t_format *format, va_list valist)
 		ft_utoabase(va_hex, "0123456789ABCDEF");
 	if (!h_str)
 		return (NULL);
-	str_size =  hex_get_str_size(format, h_str, va_hex);
+	str_size = hex_get_str_size(format, h_str, va_hex);
 	if (!(str = (char *)malloc(sizeof(char) * (str_size + 1))))
 		return (NULL);
 	if (format->precision == -1)

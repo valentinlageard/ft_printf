@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:04:06 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/14 18:13:57 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 18:23:17 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,9 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stdlib.h>
-//#include <stdio.h>
 
-// FOR DEBUGGING PURPOSES
-
-/*void		print_t_format(t_format *format)
-{
-	printf("\n--------\n");	
-	printf("conversion : %c\n", format->conversion);
-	printf("fieldwidth : %i\n", format->fieldwidth);
-	printf("fieldwidth_mode : %i\n", format->fieldwidth_mode);
-	printf("precision : %i\n", format->precision);
-}*/
-
-// THIS IS WHERE THE PARSING HAPPEN
-
-void		parse_left_fieldwidth(int *i, const char *fstr, t_format *format, va_list valist)
+void		parse_left_fieldwidth(int *i, const char *fstr, t_format *format,
+	va_list valist)
 {
 	if (!ft_isdigit(fstr[*i]) && fstr[*i] != '*')
 		return ;
@@ -56,7 +43,8 @@ void		parse_left_fieldwidth(int *i, const char *fstr, t_format *format, va_list 
 	}
 }
 
-void		parse_right_fieldwidth(int *i, const char *fstr, t_format *format, va_list valist)
+void		parse_right_fieldwidth(int *i, const char *fstr, t_format *format,
+	va_list valist)
 {
 	if (fstr[*i] != '-')
 		return ;
@@ -80,7 +68,8 @@ void		parse_right_fieldwidth(int *i, const char *fstr, t_format *format, va_list
 	}
 }
 
-void		parse_precision(int *i, const char *fstr, t_format *format, va_list valist)
+void		parse_precision(int *i, const char *fstr, t_format *format,
+	va_list valist)
 {
 	if (fstr[*i] != '.')
 		return ;
@@ -113,17 +102,16 @@ char		*parse_format(int *i, const char *fstr, va_list valist)
 {
 	t_format	*format;
 	char		*str;
-	
+
 	if (percent_check(i, fstr))
 		return (ft_strdup("%"));
 	if (!(format = create_format()))
-	 	return (NULL);
+		return (NULL);
 	parse_left_fieldwidth(i, fstr, format, valist);
 	parse_right_fieldwidth(i, fstr, format, valist);
 	parse_precision(i, fstr, format, valist);
 	parse_conversion(i, fstr, format);
 	str = formatter(format, valist);
-	//print_t_format(format); // Debugging
 	free(format);
 	return (str);
 }

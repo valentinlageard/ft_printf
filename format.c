@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:31 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/11 15:35:18 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 18:34:08 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 char	*formatter(t_format *format, va_list valist)
 {
 	char *str;
-	
+
+	str = NULL;
 	if (format->conversion == 'c')
 		str = format_char(format, valist);
 	else if (format->conversion == 's')

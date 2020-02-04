@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 15:11:07 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/13 19:12:00 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/02/04 14:45:38 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int		pointer_get_str_size(t_format *format, char *p_str, void *va_ptr)
 
 	if (!va_ptr)
 	{
-		p_slen = 5;
-		fw_pad = ft_max(0, format->fieldwidth - 5);
+		p_slen = 3;
+		fw_pad = ft_max(0, format->fieldwidth - 3);
 		return (p_slen + fw_pad);
 	}
 	else
@@ -37,7 +37,7 @@ int		pointer_get_str_size(t_format *format, char *p_str, void *va_ptr)
 	}
 	else
 	{
-		p_pad  = ft_max(0, format->precision - p_slen);
+		p_pad = ft_max(0, format->precision - p_slen);
 		fw_pad = ft_max(0, format->fieldwidth - (2 + p_pad + p_slen));
 		str_size = p_pad + fw_pad + 2 + p_slen;
 	}
@@ -77,9 +77,9 @@ char	*ptr_fill_precision(char *str, t_format *format, char *p_str)
 	int	p_slen;
 	int	p_pad;
 	int	fw_pad;
-	
+
 	p_slen = ft_strlen(p_str);
-	p_pad  = ft_max(0, format->precision - p_slen);
+	p_pad = ft_max(0, format->precision - p_slen);
 	fw_pad = ft_max(0, format->fieldwidth - (2 + p_pad + p_slen));
 	if (format->fieldwidth_mode != 2)
 	{
@@ -102,18 +102,18 @@ char	*ptr_fill_nil(char *str, t_format *format)
 {
 	char	*nil;
 	int		fw_pad;
-	
-	nil = ft_strdup("(nil)");
-	fw_pad = ft_max(0, format->fieldwidth - 5);
+
+	nil = ft_strdup("0x0");
+	fw_pad = ft_max(0, format->fieldwidth - 3);
 	if (format->fieldwidth_mode == 2)
 	{
-		ft_memcpy((void *)str, (void *)nil, 5);
-		ft_memset((void *)(str + 5), 32, fw_pad);
+		ft_memcpy((void *)str, (void *)nil, 3);
+		ft_memset((void *)(str + 3), 32, fw_pad);
 	}
 	else
 	{
 		ft_memset((void *)str, 32, fw_pad);
-		ft_memcpy((void *)(str + fw_pad), (void *)nil, 5);
+		ft_memcpy((void *)(str + fw_pad), (void *)nil, 3);
 	}
 	free(nil);
 	return (str);
@@ -125,7 +125,7 @@ char	*format_pointer(t_format *format, va_list valist)
 	void	*va_ptr;
 	char	*p_str;
 	char	*str;
-	
+
 	va_ptr = va_arg(valist, void *);
 	if (!(p_str = ft_ultoabase((unsigned long)(va_ptr), "0123456789abcdef")))
 		return (NULL);

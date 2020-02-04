@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:18 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/16 00:03:29 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 18:33:19 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	parse_fstr_and_print(int *i, const char *fstr, va_list valist, int *error)
 {
 	int		count;
 	char	*str;
-	
+
 	str = NULL;
+	count = 0;
 	if (format_is_valid(*i, fstr))
 	{
 		str = parse_format(i, fstr, valist);
@@ -37,12 +38,12 @@ int	parse_fstr_and_print(int *i, const char *fstr, va_list valist, int *error)
 	return (count);
 }
 
-int parse_fstr(const char *fstr, va_list valist)
+int	parse_fstr(const char *fstr, va_list valist)
 {
 	int		i;
 	int		count;
 	int		error;
-	
+
 	i = 0;
 	count = 0;
 	error = 0;
@@ -67,9 +68,9 @@ int parse_fstr(const char *fstr, va_list valist)
 
 int	ft_printf(const char *fstr, ...)
 {
-	va_list valist;
-	int count;
-	
+	va_list	valist;
+	int		count;
+
 	count = 0;
 	va_start(valist, fstr);
 	count = parse_fstr(fstr, valist);

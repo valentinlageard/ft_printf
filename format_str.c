@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 14:58:16 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/14 18:32:08 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 16:41:19 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		str_get_str_size(t_format *format, char *va_str)
 {
 	int	str_size;
 	int	va_strlen;
-	
+
 	if (!va_str)
 		va_strlen = format->precision >= 6 || format->precision == -1 ? 6 : 0;
 	else
@@ -42,7 +42,7 @@ char	*str_fill_str(char *str, t_format *format, char *va_str)
 	int	crop;
 	int	pad;
 	int	va_strlen;
-	
+
 	if (!va_str)
 		va_strlen = 0;
 	else
@@ -66,9 +66,9 @@ char	*str_fill_str(char *str, t_format *format, char *va_str)
 
 char	*str_fill_null(char *str, t_format *format)
 {
-	int	pad;
-	char *null;
-	
+	int		pad;
+	char	*null;
+
 	pad = ft_max(0, format->fieldwidth - 6);
 	null = ft_strdup("(null)");
 	if (format->fieldwidth_mode != 2)
@@ -80,7 +80,6 @@ char	*str_fill_null(char *str, t_format *format)
 	{
 		ft_memcpy((void *)str, (void *)null, 6);
 		ft_memset((void *)(str + 6), 32, pad);
-
 	}
 	free(null);
 	return (str);

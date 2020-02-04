@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 15:40:48 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/07 15:40:55 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 18:27:28 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_cdup(char c)
 {
 	char	*str;
-	
+
 	if (!(str = (char *)malloc(sizeof(char) * 2)))
 		return (NULL);
 	str[0] = c;

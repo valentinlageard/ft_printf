@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:03:32 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/14 16:45:10 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 18:32:05 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		int_get_str_size(t_format *format, char *i_s, int va_int)
 	int	p_p;
 	int	fw_p;
 	int	str_size;
-	
+
 	if (format->precision == 0 && va_int == 0)
 		i_sl = 0;
 	else
@@ -49,7 +49,7 @@ char	*int_fill_no_precision(char *str, t_format *format, char *i_s)
 	int fw_p;
 	int	i_sl;
 	int	n;
-	
+
 	i_sl = ft_strlen(i_s);
 	fw_p = ft_max(0, format->fieldwidth - i_sl);
 	n = i_s[0] == '-' ? 1 : 0;
@@ -73,14 +73,12 @@ char	*int_fill_no_precision(char *str, t_format *format, char *i_s)
 	return (str);
 }
 
-char	*int_fill_precision(char *str, t_format *format, char *i_s)
+char	*int_fill_precision(char *str, t_format *format, char *i_s, int i_sl)
 {
 	int	p_p;
 	int	fw_p;
-	int	i_sl;
 	int	n;
-	
-	i_sl = ft_strlen(i_s);
+
 	n = i_s[0] == '-' ? 1 : 0;
 	p_p = ft_max(0, format->precision - i_sl + n);
 	fw_p = ft_max(0, format->fieldwidth - (p_p + i_sl));
@@ -109,7 +107,7 @@ char	*format_int(t_format *format, va_list valist)
 	int		va_int;
 	char	*i_s;
 	int		str_size;
-	
+
 	va_int = va_arg(valist, int);
 	if (format->precision == 0 && va_int == 0)
 		i_s = ft_strdup("");
@@ -123,7 +121,7 @@ char	*format_int(t_format *format, va_list valist)
 	if (format->precision == -1)
 		str = int_fill_no_precision(str, format, i_s);
 	else
-		str = int_fill_precision(str, format, i_s);
+		str = int_fill_precision(str, format, i_s, ft_strlen(i_s));
 	str[str_size] = 0;
 	free(i_s);
 	return (str);

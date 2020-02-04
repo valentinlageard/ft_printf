@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 14:57:50 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/11 15:59:26 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 16:38:58 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*format_char(t_format *format, va_list valist)
 {
 	char	*str;
 	char	va_c;
-	
+
 	va_c = (unsigned char)va_arg(valist, int);
 	if (format->fieldwidth > 1)
 	{

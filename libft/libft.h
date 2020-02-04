@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 21:08:46 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/15 23:58:23 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 18:30:25 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *str);
 t_list			*ft_lstlast(t_list *lst);
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
+				void (*del)(void *));
 t_list			*ft_lstnew(void *content);
 unsigned int	ft_randr(unsigned int min, unsigned int max);
 void			*ft_calloc(size_t nmemb, size_t size);

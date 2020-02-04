@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 23:55:27 by vlageard          #+#    #+#             */
-/*   Updated: 2020/01/16 00:04:56 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/01/20 18:28:50 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_rtputstr_fd(char *s, int fd)
 		error = ft_rtputchar_fd(s[i], fd);
 		i++;
 		if (error < 0)
-			break;
+			break ;
 	}
 	return (error);
 }
