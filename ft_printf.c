@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:19:18 by vlageard          #+#    #+#             */
-/*   Updated: 2020/02/04 19:15:55 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/02/05 14:55:26 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	nullchar_case(char *str, int *nullchar, int *error)
 		*error = ft_rtputchar_fd(0, 1);
 		*error = ft_rtputstr_fd(str, 1);
 	}
+	free(str);
 	return (ft_strlen(str) + 1);
 }
 
